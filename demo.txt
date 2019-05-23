@@ -1,0 +1,31 @@
+-D = --save-dev (development dependecy/ dev purpose)
+-S = --save (required to the application to run)
+
+/*
+GULP FUNCTIONS
+gulp.task - Define task
+gulp.src - point to files to use
+gulp.dest - point to folder to output
+gulp.watch -watch files for changes
+*/
+
+// Install gulp globally
+1. npm install gulp-cli -g
+
+// Create folder then
+2. npm init
+
+npm install gulp -D
+
+// Create file
+3. touch gulpfile.js
+
+// Install SASS
+4. npm install --gulp-sass --save-dev
+
+// Build
+5. gulp sass
+
+// Install less
+gulp --tasks
+
