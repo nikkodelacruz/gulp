@@ -1,3 +1,6 @@
+'use strict' // code should be executed in strict mode -> can't use undeclared variable
+
+
 // series = execute tasks in order
 // parallel = for tasks to run max concurrency (executed out of order)
 
@@ -49,6 +52,7 @@ function css_less(){
 function css_sass(){
 	return src('assets/scss/*.scss')
 	.pipe(sass().on('error', sass.logError))
+	.pipe(cleanCSS())
 	.pipe(dest('dist'))
 }
 
