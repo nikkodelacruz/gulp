@@ -35,7 +35,7 @@ function js(){
 	return src('assets/js/*.js')
 	.pipe(babel({
 		presets: ['@babel/env']
-	})) // babel
+	})) // babel -> convert code into backwards compatible version of js in current and old browsers
 	.pipe(concat('script.min.js')) //combine all js files
 	.pipe(uglify()) //minify js
 	.pipe(dest('dist'))
@@ -73,7 +73,8 @@ exports.css_sass = css_sass;
 // on gulp commans
 exports.default = function(){
 	watch('assets/js/*.js',js);
-	watch('assets/css/less/**/*.less',css_less);
+	// watch('assets/css/less/**/*.less',css_less);
+	watch('assets/scss/**/*.scss',css_sass);
 	
 	// Or a composed task
 	// watch('src/*.js', series(clean, javascript));
