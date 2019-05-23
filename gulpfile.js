@@ -11,6 +11,7 @@ const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
+const babel = require('gulp-babel');
 
 // Depracated
 // gulp default
@@ -27,37 +28,45 @@ const sass = require('gulp-sass');
 // nested directories (js inside folders)
 // 'script/**/*.js'
 
+/*====*/
 /* JS */
-// Minify script
-// Concatinate(combine) all script files into one file
+/*====*/
 function js(){
 	return src('assets/js/*.js')
-	.pipe(concat('script.min.js'))
-	.pipe(uglify())
+	.pipe(babel({
+		presets: ['@babel/env']
+	})) // babel
+	.pipe(concat('script.min.js')) //combine all js files
+	.pipe(uglify()) //minify js
 	.pipe(dest('dist'))
 }
 
+
+
+/*=======*/
 /* STYLE */
-// Convert CSS to LESS
-// Minify CSS
+/*=======*/
 function css_less(){
 	return src('assets/less/*.less')
-	.pipe(less())
-	.pipe(cleanCSS())
-	.pipe(rename( {basename:'style',suffix:'.min'} ))
+	.pipe(less()) // compile to LESS
+	.pipe(cleanCSS()) // minify css
+	.pipe(rename({
+		basename: 'style',
+		suffix: '.min'
+	}))
 	.pipe(dest('dist'))
 }
 
 // SASS
 function css_sass(){
 	return src('assets/scss/*.scss')
-	.pipe(sass().on('error', sass.logError))
+	.pipe(sass().on('error', sass.logError)) // compile to SASS
 	.pipe(cleanCSS())
 	.pipe(dest('dist'))
 }
 
 // run these tasks on gulp command
-// exports.js = js;
+exports.js = js;
 exports.css_sass = css_sass;
 // exports.default = parallel( js, css );
 
